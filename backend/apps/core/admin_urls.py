@@ -1,0 +1,57 @@
+from django.urls import path
+
+from .admin_views import (
+    AdminAccessDetailView,
+    AdminApproverBulkView,
+    AdminApproverDetailView,
+    AdminApproverListView,
+    AdminAssignLeaveView,
+    AdminAuditView,
+    AdminEmployeeApproverDetailView,
+    AdminEmployeeApproverExportView,
+    AdminEmployeeApproverListView,
+    AdminEmployeeDetailView,
+    AdminEmployeeFilterOptionsView,
+    AdminEmployeeListView,
+    AdminEmployeeResetPasswordView,
+    AdminLeaveExportView,
+    AdminLeaveListView,
+    AdminLeaveTypeDetailView,
+    AdminLeaveTypeListView,
+    AdminOverviewView,
+    AdminReportView,
+)
+
+urlpatterns = [
+    path('overview/', AdminOverviewView.as_view(), name='admin-overview'),
+    path('employees/filters/', AdminEmployeeFilterOptionsView.as_view(), name='admin-employee-filters'),
+    path('employees/', AdminEmployeeListView.as_view(), name='admin-employees'),
+    path(
+        'employees/<str:emp_id>/reset-password/',
+        AdminEmployeeResetPasswordView.as_view(),
+        name='admin-employee-reset-password',
+    ),
+    path('employees/<str:emp_id>/', AdminEmployeeDetailView.as_view(), name='admin-employee-detail'),
+    path('access/<str:emp_id>/', AdminAccessDetailView.as_view(), name='admin-access-detail'),
+    path('assign-leave/', AdminAssignLeaveView.as_view(), name='admin-assign-leave'),
+    path('leave-types/', AdminLeaveTypeListView.as_view(), name='admin-leave-types'),
+    path('leave-types/<int:pk>/', AdminLeaveTypeDetailView.as_view(), name='admin-leave-type-detail'),
+    path('approvers/bulk/', AdminApproverBulkView.as_view(), name='admin-approvers-bulk'),
+    path('employee-approvers/', AdminEmployeeApproverListView.as_view(), name='admin-employee-approvers'),
+    path(
+        'employee-approvers/export/',
+        AdminEmployeeApproverExportView.as_view(),
+        name='admin-employee-approvers-export',
+    ),
+    path(
+        'employee-approvers/<int:pk>/',
+        AdminEmployeeApproverDetailView.as_view(),
+        name='admin-employee-approver-detail',
+    ),
+    path('approvers/', AdminApproverListView.as_view(), name='admin-approvers'),
+    path('approvers/<int:pk>/', AdminApproverDetailView.as_view(), name='admin-approver-detail'),
+    path('reports/', AdminReportView.as_view(), name='admin-reports'),
+    path('audit/', AdminAuditView.as_view(), name='admin-audit'),
+    path('leaves/export/', AdminLeaveExportView.as_view(), name='admin-leaves-export'),
+    path('leaves/', AdminLeaveListView.as_view(), name='admin-leaves'),
+]

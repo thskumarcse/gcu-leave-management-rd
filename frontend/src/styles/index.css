@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/*
+  GCU Leave Management — design tokens
+
+  Palette rationale:
+  - Ink Navy is the institutional colour (academic gravitas, used sparingly
+    for headings, the sidebar, and primary actions).
+  - Paper is a cool, slightly grey-blue white rather than pure white or warm
+    cream — keeps long tables and forms easy on the eye.
+  - Convocation Gold is the single accent colour, reserved for the active
+    state, key actions and highlights — not decoration.
+  - Status colours are deliberately muted, not saturated traffic-light tones.
+*/
+@theme {
+  --font-display: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-ink-950: #0f2438;
+  --color-ink-900: #14324d;
+  --color-ink-800: #1c4363;
+  --color-ink-700: #2a5a80;
+  --color-ink-600: #3d739c;
+  --color-ink-500: #5a8fb8;
+  --color-ink-400: #8ab0cf;
+  --color-ink-300: #b7cee2;
+  --color-ink-200: #dbe7f0;
+  --color-ink-100: #eef4f8;
+  --color-ink-50: #f7fafc;
+
+  --color-paper: #f7f8fa;
+  --color-paper-raised: #ffffff;
+
+  --color-gold-700: #93701c;
+  --color-gold-600: #ab8322;
+  --color-gold-500: #c9962c;
+  --color-gold-400: #ddb45c;
+  --color-gold-100: #f7ecd2;
+
+  --color-success-700: #276749;
+  --color-success-600: #2f855a;
+  --color-success-100: #e5f3ea;
+
+  --color-danger-700: #9b2c22;
+  --color-danger-600: #b3261e;
+  --color-danger-100: #fbe9e7;
+
+  --color-warn-700: #92620a;
+  --color-warn-600: #ad7f16;
+  --color-warn-100: #fbf0dc;
+
+  --color-slate-925: #12181f;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink-950);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-gold-100);
+  color: var(--color-ink-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink-700);
+  outline-offset: 2px;
+}

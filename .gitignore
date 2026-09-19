@@ -1,0 +1,27 @@
+# Python / Django
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/db.sqlite3
+backend/.env
+*.pyc
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Local secrets and notes
+info.txt
+workflow.docx
+
+# Employee import files (personal data)
+backend/data/*.csv
+backend/data/*.xls
+backend/data/*.xlsx
+backend/data/*.tmp
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
