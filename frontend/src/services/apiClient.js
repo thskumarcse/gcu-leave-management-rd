@@ -4,6 +4,7 @@ import {
   getAccessToken,
   getRefreshToken,
   persistSession,
+  isJwtExpired,
 } from '../utils/authStorage'
 
 export const SESSION_EXPIRED_EVENT = 'gcu:session-expired'
@@ -44,14 +45,52 @@ function expireSession() {
   }
 }
 
-apiClient.interceptors.request.use((config) => {
+function storeRefreshedTokens(payload) {
+  if (!payload.access) {
+    throw new Error('Refresh did not return an access token')
+  }
+  persistSession({
+    access: payload.access,
+    refresh: payload.refresh || getRefreshToken(),
+  })
+  return payload.access
+}
+
+function refreshAccessToken() {
+  const refresh = getRefreshToken()
+  if (!refresh) {
+    expireSession()
+    return Promise.reject(sessionExpiredError())
+  }
+  if (!refreshPromise) {
+    refreshPromise = apiClient
+      .post('/auth/refresh/', { refresh })
+      .then((res) => storeRefreshedTokens(res.data?.data || {}))
+      .finally(() => {
+        refreshPromise = null
+      })
+  }
+  return refreshPromise
+}
+
+async function ensureAccessToken() {
+  const access = getAccessToken()
+  if (access && !isJwtExpired(access)) return access
+  return refreshAccessToken()
+}
+
+apiClient.interceptors.request.use(async (config) => {
   if (sessionExpired && !isAnonymousAuthRequest(config)) {
     return Promise.reject(sessionExpiredError(config))
   }
   if (!isAnonymousAuthRequest(config)) {
-    const token = getAccessToken()
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    try {
+      const token = await ensureAccessToken()
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+    } catch {
+      return Promise.reject(sessionExpiredError(config))
     }
   }
   return config
@@ -81,22 +120,7 @@ apiClient.interceptors.response.use(
       }
       try {
         if (!refreshPromise) {
-          refreshPromise = apiClient
-            .post('/auth/refresh/', { refresh })
-            .then((res) => {
-              const payload = res.data?.data || {}
-              if (!payload.access) {
-                throw new Error('Refresh did not return an access token')
-              }
-              persistSession({
-                access: payload.access,
-                refresh: payload.refresh || refresh,
-              })
-              return payload.access
-            })
-            .finally(() => {
-              refreshPromise = null
-            })
+          refreshPromise = refreshAccessToken()
         }
         const access = await refreshPromise
         original.headers = original.headers || {}

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Badge from '../../components/common/Badge'
 import Button from '../../components/common/Button'
@@ -135,7 +134,7 @@ export default function MyLeaves() {
   )
 
   return (
-    <AppShell>
+    <>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-semibold text-ink-950">My leaves</h2>
@@ -201,6 +200,6 @@ export default function MyLeaves() {
           </div>
         ) : null}
       </Card>
-    </AppShell>
+    </>
   )
 }

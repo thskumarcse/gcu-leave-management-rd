@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import AppShell from '../../layouts/AppShell'
 import { useAuth } from '../../context/auth-context'
 import Badge from '../../components/common/Badge'
 import Button from '../../components/common/Button'
@@ -66,7 +65,7 @@ export default function Analytics() {
   }
 
   return (
-    <AppShell>
+    <>
       <h2 className="font-display text-2xl font-semibold text-ink-950">Analytics</h2>
       <p className="mt-1 text-sm text-ink-700">
         Overview stats and reports, plus a filterable list of leave applications.
@@ -106,7 +105,7 @@ export default function Analytics() {
 
       {tab === 'overview' ? <OverviewSection /> : null}
       {tab === 'leaves' ? <LeavesSection /> : null}
-    </AppShell>
+    </>
   )
 }
 

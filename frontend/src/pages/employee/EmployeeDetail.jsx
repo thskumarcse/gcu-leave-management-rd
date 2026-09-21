@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import AppShell from '../../layouts/AppShell'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
 import { fetchEmployee } from '../../services/employeeService'
 import { ProfileCard } from './Profile'
@@ -44,7 +43,7 @@ export default function EmployeeDetail() {
   }
 
   return (
-    <AppShell>
+    <>
       {canBrowseDirectory ? (
         <Link to="/employees" className="text-sm font-medium text-ink-700 hover:text-ink-950">
           ← Directory
@@ -67,6 +66,6 @@ export default function EmployeeDetail() {
         {error ? <p className="text-sm text-danger-700">{error}</p> : null}
         {employee ? <ProfileCard employee={employee} showSensitive={Boolean(employee.dob)} /> : null}
       </div>
-    </AppShell>
+    </>
   )
 }

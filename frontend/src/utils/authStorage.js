@@ -31,3 +31,18 @@ export function clearSession() {
   localStorage.removeItem(REFRESH_KEY)
   localStorage.removeItem(USER_KEY)
 }
+
+export function isJwtExpired(token, skewMs = 10000) {
+  if (!token) return true
+  const parts = token.split('.')
+  if (parts.length < 2) return true
+  try {
+    const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/')
+    const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), '=')
+    const payload = JSON.parse(atob(padded))
+    if (typeof payload.exp !== 'number') return true
+    return payload.exp * 1000 <= Date.now() + skewMs
+  } catch {
+    return true
+  }
+}

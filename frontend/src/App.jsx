@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/auth/Login'
 import ChangePassword from './pages/auth/ChangePassword'
@@ -17,13 +17,20 @@ import AdminLeaveTypes from './pages/admin/LeaveTypes'
 import AdminApprovers from './pages/admin/Approvers'
 import AdminReports from './pages/admin/Reports'
 import AdminAudit from './pages/admin/Audit'
+import AppShell from './layouts/AppShell'
 import RequireAuth from './routes/RequireAuth'
 import RequireAdmin from './routes/RequireAdmin'
 import RequireAdminOnly from './routes/RequireAdminOnly'
 import RequireApprover from './routes/RequireApprover'
 
-function Protected({ children }) {
-  return <RequireAuth>{children}</RequireAuth>
+function ProtectedShell() {
+  return (
+    <RequireAuth>
+      <AppShell>
+        <Outlet />
+      </AppShell>
+    </RequireAuth>
+  )
 }
 
 function RedirectToAnalytics() {
@@ -35,122 +42,102 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/change-password" element={<ChangePassword />} />
-      <Route path="/" element={<Protected><Home /></Protected>} />
-      <Route path="/profile" element={<Protected><Profile /></Protected>} />
-      <Route
-        path="/employees"
-        element={
-          <Protected>
+      <Route element={<ProtectedShell />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/employees"
+          element={
             <RequireAdmin>
               <Directory />
             </RequireAdmin>
-          </Protected>
-        }
-      />
-      <Route path="/employees/:empId" element={<Protected><EmployeeDetail /></Protected>} />
-      <Route path="/leaves" element={<Protected><MyLeaves /></Protected>} />
-      <Route path="/leaves/apply" element={<Protected><ApplyLeave /></Protected>} />
-      <Route path="/notifications" element={<Protected><Notifications /></Protected>} />
-      <Route
-        path="/approvals"
-        element={
-          <Protected>
+          }
+        />
+        <Route path="/employees/:empId" element={<EmployeeDetail />} />
+        <Route path="/leaves" element={<MyLeaves />} />
+        <Route path="/leaves/apply" element={<ApplyLeave />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route
+          path="/approvals"
+          element={
             <RequireApprover>
               <ApprovalsInbox />
             </RequireApprover>
-          </Protected>
-        }
-      />
-      <Route
-        path="/approvals/dashboard"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/approvals/dashboard"
+          element={
             <RequireApprover>
               <ApproverDashboard />
             </RequireApprover>
-          </Protected>
-        }
-      />
-      <Route
-        path="/settings"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
             <RequireAdminOnly>
               <Settings />
             </RequireAdminOnly>
-          </Protected>
-        }
-      />
-      <Route
-        path="/analytics"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
             <RequireAdmin>
               <Analytics />
             </RequireAdmin>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
             <RequireAdmin>
               <RedirectToAnalytics />
             </RequireAdmin>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin/employees"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin/employees"
+          element={
             <RequireAdminOnly>
               <AdminEmployees />
             </RequireAdminOnly>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin/leave-types"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin/leave-types"
+          element={
             <RequireAdminOnly>
               <AdminLeaveTypes />
             </RequireAdminOnly>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin/approvers"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin/approvers"
+          element={
             <RequireAdminOnly>
               <AdminApprovers />
             </RequireAdminOnly>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin/reports"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin/reports"
+          element={
             <RequireAdmin>
               <AdminReports />
             </RequireAdmin>
-          </Protected>
-        }
-      />
-      <Route
-        path="/admin/audit"
-        element={
-          <Protected>
+          }
+        />
+        <Route
+          path="/admin/audit"
+          element={
             <RequireAdmin>
               <AdminAudit />
             </RequireAdmin>
-          </Protected>
-        }
-      />
+          }
+        />
+      </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Badge from '../../components/common/Badge'
 import Button from '../../components/common/Button'
@@ -43,7 +42,7 @@ export default function ApproverDashboard() {
       : 'Approver 1'
 
   return (
-    <AppShell>
+    <>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-semibold text-ink-950">Approver dashboard</h2>
@@ -121,6 +120,6 @@ export default function ApproverDashboard() {
           </Card>
         </>
       ) : null}
-    </AppShell>
+    </>
   )
 }

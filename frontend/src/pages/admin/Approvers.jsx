@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Button from '../../components/common/Button'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -81,7 +80,7 @@ export default function AdminApprovers() {
   )
 
   return (
-    <AppShell>
+    <>
       <h2 className="font-display text-2xl font-semibold text-ink-950">Approvers</h2>
       <p className="mt-1 text-sm text-ink-700">
         Faculty leave goes HOD → VC. HOD applicants go to the VC only. Staff leave goes
@@ -145,6 +144,6 @@ export default function AdminApprovers() {
           <Table columns={columns} rows={rows} empty="No approver assignments yet." />
         )}
       </Card>
-    </AppShell>
+    </>
   )
 }

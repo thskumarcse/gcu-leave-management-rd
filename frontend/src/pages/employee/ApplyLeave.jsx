@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Button from '../../components/common/Button'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -123,7 +122,7 @@ export default function ApplyLeave() {
   }
 
   return (
-    <AppShell>
+    <>
       <h2 className="font-display text-2xl font-semibold text-ink-950">Apply for leave</h2>
       <p className="mt-1 max-w-2xl text-sm text-ink-700">
         Submit a request against your employee record. Faculty applications go to the Head of
@@ -269,6 +268,6 @@ export default function ApplyLeave() {
           </form>
         )}
       </Card>
-    </AppShell>
+    </>
   )
 }

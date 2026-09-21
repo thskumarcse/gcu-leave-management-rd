@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Badge from '../../components/common/Badge'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -32,7 +31,7 @@ export default function Profile() {
   }, [])
 
   return (
-    <AppShell>
+    <>
       <div className="mb-6">
         <h2 className="font-display text-2xl font-semibold text-ink-950">My profile</h2>
         <p className="mt-1 text-sm text-ink-700">
@@ -51,7 +50,7 @@ export default function Profile() {
       {error ? <p className="text-sm text-danger-700">{error}</p> : null}
 
       {employee ? <ProfileCard employee={employee} showSensitive /> : null}
-    </AppShell>
+    </>
   )
 }
 

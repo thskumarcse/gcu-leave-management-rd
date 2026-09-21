@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import AppShell from '../layouts/AppShell'
 import Card from '../components/common/Card'
 import Badge from '../components/common/Badge'
 import Button from '../components/common/Button'
@@ -38,7 +37,7 @@ export default function Home() {
   }, [])
 
   return (
-    <AppShell>
+    <>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-semibold text-ink-950">
@@ -175,6 +174,6 @@ export default function Home() {
           </Card>
         </>
       ) : null}
-    </AppShell>
+    </>
   )
 }

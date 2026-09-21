@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import AppShell from '../../layouts/AppShell'
 import Badge from '../../components/common/Badge'
 import Button from '../../components/common/Button'
 import Card from '../../components/common/Card'
@@ -185,7 +184,7 @@ export default function Settings() {
   }
 
   return (
-    <AppShell>
+    <>
       <h2 className="font-display text-2xl font-semibold text-ink-950">Settings</h2>
       <p className="mt-1 text-sm text-ink-700">
         Review approver assignments, correct employee master records, set or remove personal Approver 1
@@ -224,7 +223,7 @@ export default function Settings() {
       {tab === 'change-password' ? <ResetPasswordSection /> : null}
       {tab === 'leave-types' ? <LeaveTypesSection /> : null}
       {tab === 'access' && user?.is_admin ? <AccessSection /> : null}
-    </AppShell>
+    </>
   )
 }
 

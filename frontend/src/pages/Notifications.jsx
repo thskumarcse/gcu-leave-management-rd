@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import AppShell from '../layouts/AppShell'
 import Card from '../components/common/Card'
 import Button from '../components/common/Button'
 import LoadingSpinner from '../components/common/LoadingSpinner'
@@ -56,7 +55,7 @@ export default function Notifications() {
   const totalPages = Math.max(1, Math.ceil(count / pageSize))
 
   return (
-    <AppShell>
+    <>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-semibold text-ink-950">Notifications</h2>
@@ -111,6 +110,6 @@ export default function Notifications() {
           </div>
         </div>
       ) : null}
-    </AppShell>
+    </>
   )
 }

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import Badge from '../../components/common/Badge'
 import Button from '../../components/common/Button'
@@ -95,7 +94,7 @@ export default function AdminLeaveTypes() {
   )
 
   return (
-    <AppShell>
+    <>
       <h2 className="font-display text-2xl font-semibold text-ink-950">Leave types</h2>
       <p className="mt-1 text-sm text-ink-700">Catalogue used on the apply-leave form and imported history.</p>
 
@@ -155,6 +154,6 @@ export default function AdminLeaveTypes() {
           <Table columns={columns} rows={rows} empty="No leave types yet." />
         )}
       </Card>
-    </AppShell>
+    </>
   )
 }

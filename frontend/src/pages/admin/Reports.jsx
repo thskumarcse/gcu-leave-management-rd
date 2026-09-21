@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import AppShell from '../../layouts/AppShell'
 import Card from '../../components/common/Card'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
 import StatCard from '../../components/dashboard/StatCard'
@@ -38,7 +37,7 @@ export default function AdminReports() {
     : []
 
   return (
-    <AppShell>
+    <>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl font-semibold text-ink-950">Reports</h2>
@@ -114,6 +113,6 @@ export default function AdminReports() {
           </Card>
         </>
       ) : null}
-    </AppShell>
+    </>
   )
 }
